@@ -36,11 +36,11 @@ test_data  = pandas.read_csv(TEST_FILE ,header=None)
 
 # Preprocess data 
 train_data.sample(frac=1)      # shuffle training data
-train_target = train_data[[0]] # Save targets as a separate dataframe/array
+train_target = train_data[0] # Save targets as a separate dataframe/array
 train_data.drop(columns=0)     # Remove column with target info
 train_data /= INPUT_MAX        # scale inputs between 0 and 1 by dividing by input max value
 
-test_target = test_data[[0]] # Save targets as a separate dataframe/array
+test_target = test_data[0] # Save targets as a separate dataframe/array
 test_data.drop(columns=0)    # Remove column with target info
 test_data /= INPUT_MAX       # scale inputs between 0 and 1 by dividing by input max value
 
@@ -55,7 +55,7 @@ for rate in learning_rate:
         for j in range(0,10):
             output[j] = net[j].evaluate(train_data.loc[i])
         
-        if(output.index(max(output)) == train_target[i]):
+        if(train_target[i] == output.index(max(output))):
             accuracy['train_c'][0]+=1
         else:
             accuracy['train_i'][0]+=1
@@ -64,7 +64,7 @@ for rate in learning_rate:
     for i in range(0,len(test_data)):
         for j in range(0,10):
             output[j] = net[j].evaluate(test_data.loc[i])
-        
+
         if(output.index(max(output)) == test_target[i]):
             accuracy['test_c'][0]+=1
         else:
