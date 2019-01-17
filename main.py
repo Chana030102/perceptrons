@@ -125,5 +125,7 @@ for rate in learning_rate:
         confu[test_target[i]][output.index(max(output))]+=1
     
     # Output accuracy and confusion matrix to CSV file
-    accuracy.to_csv('accuracy, rate='+str(rate)+'.csv')
-    confu.to_csv('confusionmatrix, rate='+str(rate)+'.csv')
+    accuracy_title = 'accuracy_rate='+str(rate)+'.csv'
+    cmatrix_title = 'confusionmatrix_rate='+str(rate)+'.csv'
+    accuracy.to_csv(accuracy_title)
+    confu.to_csv(cmatrix_title)
