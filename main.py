@@ -30,6 +30,10 @@ accuracy = pandas.DataFrame(0,index=range(0,EPOCH_MAX+1),columns=['test_c','test
 # set up confusion matrix: rows=actual, col=predicted
 confu  = pandas.DataFrame(0,index=range(0,10),columns=range(0,10)) 
 
+# Import data
+train_data = pandas.read_csv(TRAIN_FILE,header=None)
+test_data  = pandas.read_csv(TEST_FILE ,header=None)
+
 # Preprocess data 
 train_data.sample(frac=1)      # shuffle training data
 train_target = train_data[0].values # Save targets as a separate dataframe/array
@@ -65,7 +69,7 @@ for rate in learning_rate:
 
         if(output.index(max(output)) == test_target[i]):
             accuracy['test_c'][0]+=1
-        else:8
+        else:
             accuracy['test_i'][0]+=1
 
     # Start training and record accuracy after each epoch
