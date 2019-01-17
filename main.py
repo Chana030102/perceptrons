@@ -73,7 +73,7 @@ for rate in learning_rate:
             accuracy['test_i'][0]+=1
 
     # Start training and record accuracy after each epoch
-    for e in range(0,EPOCH_MAX+1):
+    for e in range(1,EPOCH_MAX+1):
 
         # Loop through each row of training data
         for x in range(0,len(train_data)):
@@ -96,28 +96,28 @@ for rate in learning_rate:
                 else:
                     net[y].updateWeights(0,output[y],train_data[x],rate)
 
-            # Evaluate and test accuracy at each epoch with training data
-            for i in range(0,len(train_data)):
-                for j in range(0,10):
-                    output[j] = net[j].evaluate(train_data[i])
-                
-                if(output.index(max(output)) == train_target[i]):
-                    accuracy['train_c'][e]+=1
-                else:
-                    accuracy['train_i'][e]+=1
-                
-            # Evaluate and test accuracy at each epoch with test data
-            for i in range(0,len(test_data)):
-                for j in range(0,10):
-                    output[j] = net[j].evaluate(test_data[i])
-                
-                if(output.index(max(output)) == test_target[i]):
-                    accuracy['test_c'][e]+=1
-                else:
-                    accuracy['test_i'][e]+=1
+        # Evaluate and test accuracy at each epoch with training data
+        for i in range(0,len(train_data)):
+            for j in range(0,10):
+                output[j] = net[j].evaluate(train_data[i])
+            
+            if(output.index(max(output)) == train_target[i]):
+                accuracy['train_c'][e]+=1
+            else:
+                accuracy['train_i'][e]+=1
+            
+        # Evaluate and test accuracy at each epoch with test data
+        for i in range(0,len(test_data)):
+            for j in range(0,10):
+                output[j] = net[j].evaluate(test_data[i])
+            
+            if(output.index(max(output)) == test_target[i]):
+                accuracy['test_c'][e]+=1
+            else:
+                accuracy['test_i'][e]+=1
     
     # Finished training for this learning rate. Construct confusion matrix
-    for i in range(0,len(test_data.columns)):
+    for i in range(0,len(test_data)):
         for j in range(0,10):
             output[j] = net[j].evaluate(test_data[i])
         
