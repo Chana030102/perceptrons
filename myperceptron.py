@@ -32,6 +32,6 @@ class Perceptron:
     # Change of weight = (learn_rate)*(target-output)*(input)
     def updateWeights(self,target,output,inputs,learn_rate):
         delta = learn_rate*(target-output)
-        delta_weights = delta*inputs
+        delta_weights = numpy.multiply(delta,inputs)
         self.weights = numpy.add(self.weights,delta_weights)
         self.bias_weight += delta
